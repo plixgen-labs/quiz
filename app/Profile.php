@@ -2,11 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Profile extends Model
 {
     use Notifiable;
 
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'provider', 'provider_id', 'user_id'
+        'name', 'dob', 'gender', 'email', 'avatar'
     ];
 
     /**
@@ -25,6 +26,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+
     ];
 }

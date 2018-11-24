@@ -35,4 +35,15 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_AUTH_ID'),         // Your GitHub Client ID
+        'client_secret' => env('GOOGLE_AUTH_SCECRET'), // Your GitHub Client Secret
+        'redirect' => env('GOOGLE_AUTH_URL'),
+    ],
+
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),         // Your GitHub Client ID
+        'client_secret' => env('GITHUB_CLIENT_SECRET'), // Your GitHub Client Secret
+        'redirect' => 'http://your-callback-url',
+    ],
 ];

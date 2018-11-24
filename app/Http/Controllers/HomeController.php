@@ -32,11 +32,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // get the auth user data
-        $authUser = Auth::user();
-        // get the user details
-        $userData = Profile::where('id', $authUser->user_id)->first();
-
+        // // get the auth user data
+        // $authUser = Auth::user();
+        // // get the user details
+        // $userData = Profile::where('id', $authUser->user_id)->first();
+        $userData = $this->getUserDetails();
         // render the view
         return view('home',['user'=>$userData]);
     }

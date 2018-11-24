@@ -14,7 +14,7 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'provider', 'provider_id', 'user_id'
+        'text', 'hint', 'image', 'bgimage', 'difficulty', 'answer', 'user_id'
     ];
 
     /**
@@ -23,6 +23,6 @@ class Question extends Model
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        
     ];
 }

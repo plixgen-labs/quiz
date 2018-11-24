@@ -21,3 +21,8 @@ Route::get('login/{provider}', 'LoginController@redirectToProvider');
 Route::get('login/{provider}/callback', 'LoginController@handleProviderCallback');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Question routes
+Route::get('add/question', 'QuestionController@ShowQuestionAdditionForm');
+
+Route::post('add/question', 'QuestionController@AddQuestion');

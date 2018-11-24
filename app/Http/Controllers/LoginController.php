@@ -42,6 +42,7 @@ class LoginController extends Controller
         // print_r($user);die();
         // $user->token;
         $authUser = $this->findOrCreateUser($user, $provider);
+        $userData = Profile::where('id', $authUser->user_id)->first();
         Auth::login($authUser, true);
         return redirect('/home');
     }

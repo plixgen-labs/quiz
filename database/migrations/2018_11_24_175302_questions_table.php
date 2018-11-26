@@ -18,13 +18,13 @@ class QuestionsTable extends Migration
             $table->string('text')->nullable()->comment('text for the image');
             $table->text('source')->comment('source of the image, can be link, can be stored localy');
             $table->integer('user_id')->references('id')->on('profiles')->comment('user id of the user who uploaded the image');
-            $table->integer('type')->nullable()->comment('type of media it is, i.e extention of media, eg. jpg for image, mp3 for sound etc');
+            $table->string('type')->nullable()->comment('type of media it is, i.e extention of media, eg. jpg for image, mp3 for sound etc');
             $table->timestamps();
         });
 
         Schema::create('questions', function (Blueprint $table) {
             $table->bigincrements('id');
-            $table->string('qid')->comment('question id to be shown to the user');
+            $table->string('qid')->unique()->comment('question id to be shown to the user');
             $table->string('text')->comment('question which is shown to the user')->default('What is common between these two pictures?');
             $table->string('hint')->nullable()->comment('hint to help the user');
             $table->longText('image')->comment('comma seperted id link to image table or link/source');
@@ -33,7 +33,7 @@ class QuestionsTable extends Migration
             $table->integer('difficulty')->nullable()->comment('scale of 1 to 10 as the multiplication factor of the base point');
             $table->integer('user_id')->references('id')->on('profiles')->comment('user id of the user who created the question');
             $table->string('region')->nullable()->comment('defines the specific region of the question');
-            $table->biginteger('votes')->nullable()->comment('disable the question if the votes are in negative');
+            $table->integer('votes')->default(0)->comment('disable the question if the votes are in negative');
             $table->boolean('enable')->default(1)->comment('wont show the question if not enabled');
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Question extends Model
 {
@@ -14,7 +15,7 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-        'text', 'hint', 'image', 'bgimage', 'difficulty', 'answer', 'user_id'
+        'qid','text', 'hint', 'image', 'bgimage', 'difficulty', 'answer', 'user_id'
     ];
 
     /**
@@ -23,6 +24,6 @@ class Question extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 }

@@ -46,7 +46,7 @@
                         <div class="form-group{{ $errors->has('ans') ? ' has-error' : '' }}">
                               <label for="ans" class="col-md-12 control-label">Correct Answer</label>
                               <div class="col-md-10" id="{{ $randomId['1'] }}">
-                                  <input id="ans" type="text" class="form-control" name="ans" value="{{''}}">
+                                  <input id="ans" type="text" class="form-control" name="ans[]" value="{{''}}">
                                   @if ($errors->has('ans'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('ans') }}</strong>

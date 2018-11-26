@@ -20,6 +20,10 @@ use App\Http\Controllers\View;          // to acess the views functions
 
 use Hash;                               // to access the hashing functions
 
+use Illuminate\Http\File;               // to access the file class
+
+use Illuminate\Support\Facades\Storage; // for storage and retrival of files/images
+
 class QuestionController extends Controller
 {
     /**
@@ -47,14 +51,71 @@ class QuestionController extends Controller
             'ans'     => 'required|array|min:1',
             'ans.*'   => 'required|max:255',
             'files'   => 'required|array|min:2',
-            'files.*' => 'required|mime:jpg,png,svg|dimensions:min_width=1000,min_height=2000',
+            'files.*' => 'required|mimes:jpg,png,svg|dimensions:min_width=400,min_height=600',
         ])->validate();
 
-        var_dump($request);die();
+        // the array of the file id inserted into the database
+        $insertedFilesArray = $this->uploadAndStoreFiles($request->file('files'));
+
+        // get the current user Details
+        $userData = $this->getUserDetails();
+
+        // unique hash for the question to be used as question id which can be shared with the others
+        $qId = hash('haval256,4', mt_rand().md5($request->qtext).mt_rand().md5($request->hint).mt_rand());
+
+        // insert the Question into the database
+        $insertedQuestion = Question::create([
+            'qid'     => $qId,
+            'text'    => $request->qtext,
+            'hint'    => $request->hint,
+            'image'   => implode(',', $insertedFilesArray),
+            'bgimage' => '',
+            'answer'  => implode(',', $request->ans),
+            'user_id' => $userData->id,
+        ])->id;
+
+        // check for the insertion is success or not
+        if ($insertedQuestion > 0 && $insertedQuestion != NULL)
+        {
+          // redirect to the upload sucess page
+          return view('quesAns/addQuestion',[
+            'user'       => $userData,
+            'randomId'   => [mt_rand(),mt_rand()],
+            'status'     => 'sucess',
+            'message'    => 'Question Upload Sucess<br>Share the question with your friends (URL)',
+          ]);
+        }else{
+          // redirect to the upload sucess page
+          return view('quesAns/addQuestion',[
+            'user'       => $userData,
+            'randomId'   => [mt_rand(),mt_rand()],
+            'status'     => 'danger',
+            'message'    => 'Question Upload failed',
+          ]);
+        }
+
     }
 
-    public function uploadImage ()
+    public function uploadAndStoreFiles($files)
     {
-      // code...
+      // get the current user Details
+      $userData = $this->getUserDetails();
+      // set the $insertedId as NULL
+      $insertedId = NULL;
+      // loop each files and insert it into the database and get the Id of the inserted image
+      foreach($files as $file)
+      {
+          $path = Storage::putFile('/images', $file);
+          $insertedId[] = DB::table('images')->insertGetId([
+                            'text'      =>$file->getClientOriginalName(),
+                            'source'    =>$path,
+                            'user_id'   =>$userData->id,
+                            'type'      =>$file->clientExtension(),
+                            'created_at'=>date('Y-m-d H:i:s'),
+                            'updated_at'=>date('Y-m-d H:i:s'),
+                          ]);
+      }
+      // return the inserted Id of the images
+      return $insertedId;
     }
 }

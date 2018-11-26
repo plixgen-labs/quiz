@@ -32,6 +32,9 @@ class QuestionsTable extends Migration
             $table->longText('answer')->comment('comma seperated answer list');
             $table->integer('difficulty')->nullable()->comment('scale of 1 to 10 as the multiplication factor of the base point');
             $table->integer('user_id')->references('id')->on('profiles')->comment('user id of the user who created the question');
+            $table->string('region')->nullable()->comment('defines the specific region of the question');
+            $table->biginteger('votes')->nullable()->comment('disable the question if the votes are in negative');
+            $table->boolean('enable')->default(1)->comment('wont show the question if not enabled');
             $table->timestamps();
         });
 

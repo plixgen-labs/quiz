@@ -33,44 +33,28 @@ class QuestionController extends Controller
     public function ShowQuestionAdditionForm()
     {
       $user = $this->getUserDetails();
-      return view('quesAns/addQuestion',['user'=>$user]);
+      return view('quesAns/addQuestion',[
+        'user' => $user,
+        'randomId' => [mt_rand(),mt_rand()],
+      ]);
     }
 
     public function AddQuestion(Request $request)
     {
-      // Validate the request...
-      $validator = Validator::make($request->all(), [
-              'text' => 'required|max:255',
-              'hint' => 'max:255',
-              'image' => 'required',
-              'bgimage' => '',
-        ]);
-        // if validation fails send back to register page
-        if ($validator->fails()) {
-            return redirect('/admin/register')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        $validator = Validator::make($request->all(), [
+            'qtext'   => 'required|max:255',
+            'hint'    => 'nullable',
+            'ans'     => 'required|array|min:1',
+            'ans.*'   => 'required|max:255',
+            'files'   => 'required|array|min:2',
+            'files.*' => 'required|mime:jpg,png,svg|dimensions:min_width=1000,min_height=2000',
+        ])->validate();
 
-        // storing the data
-        $user = new Admin;
-        // getting the users data
-        $user->name = ucwords(strtolower($request->name));
-        $user->username = strtolower($request->username);
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->phone = $request->phone;
-        $user->branch = $request->branch;
-        $user->address = $request->address;
+        var_dump($request);die();
+    }
 
-        //saving the data into table
-        $user->save();
-        if($user->save())
-        {
-            echo "data added to table";
-            return redirect('/admin/dashboard');
-        }
-        return redirect('/admin/login');
-
+    public function uploadImage ()
+    {
+      // code...
     }
 }

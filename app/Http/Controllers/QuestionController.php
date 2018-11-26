@@ -118,4 +118,15 @@ class QuestionController extends Controller
       // return the inserted Id of the images
       return $insertedId;
     }
+
+    public function ShowQuestion($qid)
+    {
+      $question = Question::where('qid', $qid)->where('enable', 1)->get();
+
+      return view('quesAns/showQuestion',[
+        'user'       => $this->getUserDetails(),
+        'question'   => $question,
+      ]);
+
+    }
 }

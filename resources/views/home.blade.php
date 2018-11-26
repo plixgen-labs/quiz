@@ -24,7 +24,9 @@
                 <div class="card-header">Recently Added Questions</div>
 
                 <div class="card-body">
-                  
+                    @foreach ($questionsList as $question)
+                      <a href="show/question/{{$question->qid}}">{{ $question->text }}</a><br>
+                    @endforeach
                 </div>
             </div>
         </div>

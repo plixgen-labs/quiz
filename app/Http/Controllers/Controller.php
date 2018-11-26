@@ -16,6 +16,8 @@ use App\Profile;
 // to use user login controller
 use App\User;
 
+use App\Question;                       // to use the Question class
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -28,5 +30,10 @@ class Controller extends BaseController
       $userData = Profile::where('id', $authUser->user_id)->first();
 
       return $userData;
+    }
+
+    public function getRecentQuestionList($limit=10)
+    {
+        return Question::where('enable', 1)->orderBy('id', 'desc')->limit($limit)->get();
     }
 }

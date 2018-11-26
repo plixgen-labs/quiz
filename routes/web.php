@@ -26,3 +26,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('add/question', 'QuestionController@ShowQuestionAdditionForm');
 
 Route::post('add/question', 'QuestionController@AddQuestion');
+
+Route::get('show/question/{qid}', 'QuestionController@ShowQuestion');

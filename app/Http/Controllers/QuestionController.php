@@ -121,12 +121,52 @@ class QuestionController extends Controller
 
     public function ShowQuestion($qid)
     {
+      // get the question data
       $question = Question::where('qid', $qid)->where('enable', 1)->get();
+
+      // the files associated with the question
+      $imagesList = explode(",", $question[0]->image);
+
+      $imageArray = null;
+      $imageURLArray = null;
+
+      foreach ($imagesList as $imageId)
+      {
+          $imageArray[] = DB::table('images')->where('id', $imageId)->get(['source','type']);
+      }
+
+      // var_dump($imageURLArray);die();
 
       return view('quesAns/showQuestion',[
         'user'       => $this->getUserDetails(),
         'question'   => $question,
+        'images'     => $imageArray,
       ]);
 
+    }
+
+    public function submitAnswer($qid,Request $request)
+    {
+      // validate the input data
+      $validator = Validator::make($request->all(), [
+          'ans'     => 'required|max:255',
+      ])->validate();
+
+      // get the question data
+      $question = Question::where('qid', $qid)->where('enable', 1)->get();
+
+      // convert the string stored in the db to an array
+      $answerList = explode(",", $question[0]->answer);
+      if(in_array($request->ans,$answerList))
+      {
+        session()->flash('msg', 'correct answer');
+        return redirect()->back();
+      }
+      else
+      {
+        session()->flash('msg', 'wrong answer');
+        return redirect()->back();
+      }
+      var_dump($answerList);die();
     }
 }

@@ -27,4 +27,19 @@ Route::get('add/question', 'QuestionController@ShowQuestionAdditionForm');
 
 Route::post('add/question', 'QuestionController@AddQuestion');
 
+Route::post('add/answer/{qid}', 'QuestionController@submitAnswer');
+
 Route::get('show/question/{qid}', 'QuestionController@ShowQuestion');
+
+// retrive the image files
+Route::get('/retrive/images/{filename}', function ($filename)
+{
+    // if(!File::exists($path)) abort(404);
+    $contents = Storage::get('images/'.$filename);
+    $extensions = explode('.', $filename);
+    $type = $extensions[1];
+
+    $response = Response::make($contents, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+});

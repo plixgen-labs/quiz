@@ -71,7 +71,7 @@
             <!-- Message trigger for the events -->
             @if(isset($message))
               <div class="alert alert-{{$status}}" role="alert">
-              <strong>{{ $message }}</strong>
+                <strong>{{ $message }}</strong>
               </div>
             @endif
 

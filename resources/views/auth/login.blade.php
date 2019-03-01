@@ -18,6 +18,11 @@
                                 <i class="fab fa-google"></i>
                               </span>
                             </a>
+                            <a href="{{ url('/login/github') }}">
+                              <span style="font-size: 48px; color: Dodgerblue;">
+                                <i class="fab fa-github"></i>
+                              </span>
+                            </a>
                           </div>
                         </div>
 

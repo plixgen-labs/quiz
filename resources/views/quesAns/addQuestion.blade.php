@@ -102,7 +102,7 @@
   </div>
 
 </div>
-<script src="{{ asset('js/dropzone.js') }}"></script>
+<!-- <script src="{{ asset('js/dropzone.js') }}"></script> -->
 <script>
 function duplicate(divId) {
     // document.getElementById('button'+divId).onclick = duplicate(divId);

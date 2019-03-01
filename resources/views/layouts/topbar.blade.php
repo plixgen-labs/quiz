@@ -28,6 +28,31 @@
       </div>
     </li>
 
+    <!-- Nav Item - Admin actions -->
+    @if($user->isadmin)
+    <li class="nav-item dropdown no-arrow">
+      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+      </a>
+      <!-- Dropdown - Admin actions -->
+      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+        <a class="dropdown-item" href="/add/question">
+          <i class="fas fa-info fa-sm fa-fw mr-2 text-gray-400"></i>
+          Add Questions
+        </a>
+        <a class="dropdown-item" href="#">
+          <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+          Settings
+        </a>
+        <a class="dropdown-item" href="#">
+          <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+          Users Activity Log
+        </a>
+      </div>
+    </li>
+
+    <div class="topbar-divider d-none d-sm-block"></div>
+    @endif
     <!-- Nav Item - Alerts -->
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

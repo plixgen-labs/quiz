@@ -20,6 +20,12 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+  <style media="screen">
+    .bg-login-image {
+      background: url("{{ asset('img/undraw_problem_solving_ft81.svg') }}");
+      background-size: 465px 356px;
+    }
+  </style>
 
 </head>
 
@@ -36,8 +42,7 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-3">
-              </div>
+              <div class="col-lg-6 bg-login-image"></div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
@@ -57,8 +62,6 @@
                     </a>
                   </form>
                 </div>
-              </div>
-              <div class="col-lg-3">
               </div>
             </div>
           </div>

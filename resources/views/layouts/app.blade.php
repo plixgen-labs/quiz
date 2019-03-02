@@ -41,6 +41,13 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+          {!! Session::has('msg') ? Session::get("msg") : '' !!}
+          <!-- Message trigger for the events -->
+          @if(isset($message))
+            <div class="alert alert-{{$status}}" role="alert">
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
           @yield('content')
         </div>
         <!-- /.container-fluid -->

@@ -22,7 +22,7 @@
   <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
   <style media="screen">
     .bg-login-image {
-      background: url("{{ asset('img/undraw_problem_solving_ft81.svg') }}");
+      background: url("{{ asset('img/undraw_login_jdch.svg') }}");
       background-size: 465px 356px;
     }
   </style>

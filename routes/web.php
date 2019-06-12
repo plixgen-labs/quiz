@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::check())
+    {
+      return redirect('/home');
+    }
+    return redirect('/login');
 });
 
 // auth routes
@@ -43,3 +47,5 @@ Route::get('/retrive/images/{filename}', function ($filename)
     $response->header("Content-Type", $type);
     return $response;
 });
+
+Route::get('list/question','Controller@getRecentQuestionList');

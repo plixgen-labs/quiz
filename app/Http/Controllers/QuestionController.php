@@ -77,15 +77,15 @@ class QuestionController extends Controller
         // check for the insertion is success or not
         if ($insertedQuestion > 0 && $insertedQuestion != NULL)
         {
-          // redirect to the upload sucess page
+          // render view with sucess message
           return view('quesAns/addQuestion',[
             'user'       => $userData,
             'randomId'   => [mt_rand(),mt_rand()],
             'status'     => 'sucess',
-            'message'    => 'Question Upload Sucess<br>Share the question with your friends (URL)',
+            'message'    => "Question Upload Sucess. Share the question with your friends (URL)",
           ]);
         }else{
-          // redirect to the upload sucess page
+          // render view with failure message
           return view('quesAns/addQuestion',[
             'user'       => $userData,
             'randomId'   => [mt_rand(),mt_rand()],
@@ -120,6 +120,32 @@ class QuestionController extends Controller
     }
 
     public function ShowQuestion($qid)
+    {
+      // get the question data
+      $question = Question::where('qid', $qid)->where('enable', 1)->get();
+
+      // the files associated with the question
+      $imagesList = explode(",", $question[0]->image);
+
+      $imageArray = null;
+      $imageURLArray = null;
+
+      foreach ($imagesList as $imageId)
+      {
+          $imageArray[] = DB::table('images')->where('id', $imageId)->get(['source','type']);
+      }
+
+      // var_dump($imageURLArray);die();
+
+      return view('quesAns/showQuestion',[
+        'user'       => $this->getUserDetails(),
+        'question'   => $question,
+        'images'     => $imageArray,
+      ]);
+
+    }
+
+    public function ListQuestion()
     {
       // get the question data
       $question = Question::where('qid', $qid)->where('enable', 1)->get();

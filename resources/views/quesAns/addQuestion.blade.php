@@ -89,6 +89,24 @@
 
   <!-- Recent questions Div -->
   <div class="col-xl-4 col-lg-5">
+    <!-- Instructions Div -->
+    <div class="card shadow mb-4">
+      <!-- Card Header - Accordion -->
+      <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+        <h6 class="m-0 font-weight-bold text-primary">Instructions</h6>
+      </a>
+      <!-- Card Content - Collapse -->
+      <div class="collapse show" id="collapseCardExample">
+        <div class="card-body">
+          <ul>
+            <li><b>Question </b>: A small text to describe the question. it can be "How these two are related?"</li>
+            <li><b>Question Hint </b>: Addition text which can help to find the answer</li>
+            <li><b>Answer </b>: Actul answer, if there are more then one answer then use + sign to add multiple.</li>
+            <li><b>Images </b>: Images, atleast 2 images are necessary, at max 6 images can be added, use + sign to add multiple images. The image should be atleast 200x200px</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="card shadow mb-4">
       <!-- Card Header - Dropdown -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">

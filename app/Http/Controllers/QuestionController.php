@@ -40,6 +40,7 @@ class QuestionController extends Controller
       return view('quesAns/addQuestion',[
         'user' => $user,
         'randomId' => [mt_rand(),mt_rand()],
+        'questionsList' =>  $this->getRecentQuestionList(),
       ]);
     }
 
@@ -211,12 +212,12 @@ class QuestionController extends Controller
 
       // get the user Details
       $userData = $this->getUserDetails();
-      
+
       // get the question data
       $question = Question::where('qid', $qid)->where('enable', 1)->get();
 
       // get the Points
-      $points = $this->getQuestionPoints($question[0]->id),
+      $points = $this->getQuestionPoints($question[0]->id);
 
       // convert the string stored in the db to an array
       $answerList = explode(",", $question[0]->answer);

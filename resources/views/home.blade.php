@@ -40,7 +40,7 @@
       <!-- Card Body -->
       <div class="card-body">
         @foreach ($questionsList as $question)
-          <a href="show/question/{{$question->qid}}">{{ $question->text }}</a><br>
+          <a href="{{url('show/question/')}}{{'/'.$question->qid}}">{{ $question->text }}</a><br>
         @endforeach
       </div>
     </div>

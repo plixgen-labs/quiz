@@ -14,7 +14,8 @@
       <!-- Card Body -->
       <div class="card-body">
         @foreach($images as $image)
-            <img src="{{ url('/retrive/'.$image[0]->source) }}" height="400" width="600"><br>
+            <img src="{{ url('/retrive/'.$image[0]->source) }}" style="max-height: 100%;max-width: 100%;"><br>
+            <br>
         @endforeach
 
         <br>
@@ -72,7 +73,7 @@
       <!-- Card Body -->
       <div class="card-body">
         @foreach ($questionsList as $question)
-          <a href="show/question/{{$question->qid}}">{{ $question->text }}</a><br>
+          <a href="{{url('show/question/')}}{{'/'.$question->qid}}">{{ $question->text }}</a><br>
         @endforeach
       </div>
     </div>

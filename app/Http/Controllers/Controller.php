@@ -60,7 +60,7 @@ class Controller extends BaseController
           $difficulty = (1.00-((float)$correct_answers/(float)$submitted_answers));
           // Question::where('qid', $qid)->update(['difficulty', (integer)$difficulty]);
 
-          return (int)$base_point*$difficulty;
+          return (int) ($base_point*$difficulty);
         }
         return $base_point;
       }

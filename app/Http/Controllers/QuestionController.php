@@ -127,11 +127,14 @@ class QuestionController extends Controller
 
     public function ShowQuestion($qid)
     {
+      // get the user Details
+      $userData = $this->getUserDetails();
+
       // get the question data
       $question = Question::where('qid', $qid)->where('enable', 1)->get();
 
       // Check if the user already had answered the question correctly
-      if(Answer::where('question_id', $question[0]->id)->where('result',True)->exists())
+      if(Answer::where('user_id', $userData->id)->where('question_id', $question[0]->id)->where('result',True)->exists())
       {
           // return Home
           $alert = array(

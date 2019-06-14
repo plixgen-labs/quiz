@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Question extends Model
+class Answer extends Model
 {
     use Notifiable;
 
@@ -15,7 +15,7 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-        'id','qid','text', 'hint', 'image', 'bgimage', 'difficulty', 'answer', 'user_id'
+        'id','user_id', 'question_id', 'answer', 'result', 'note', 'points_awarded'
     ];
 
     /**

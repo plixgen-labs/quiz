@@ -96,7 +96,9 @@
       </div>
       <!-- Card Body -->
       <div class="card-body">
-
+        @foreach ($questionsList as $question)
+          <a href="show/question/{{$question->qid}}">{{ $question->text }}</a><br>
+        @endforeach
       </div>
     </div>
   </div>

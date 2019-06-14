@@ -77,12 +77,14 @@ class QuestionController extends Controller
         // check for the insertion is success or not
         if ($insertedQuestion > 0 && $insertedQuestion != NULL)
         {
+          $host = request()->getHttpHost();
           // render view with sucess message
           return view('quesAns/addQuestion',[
             'user'       => $userData,
             'randomId'   => [mt_rand(),mt_rand()],
-            'status'     => 'sucess',
-            'message'    => "Question Upload Sucess. Share the question with your friends (URL)",
+            'status'     => 'success',
+            'message'    => "Question Upload Sucess. Share the question with your friends ($host/show/question/$insertedQuestion)",
+            'questionsList' =>  $this->getRecentQuestionList(),
           ]);
         }else{
           // render view with failure message
@@ -91,6 +93,7 @@ class QuestionController extends Controller
             'randomId'   => [mt_rand(),mt_rand()],
             'status'     => 'danger',
             'message'    => 'Question Upload failed',
+            'questionsList' =>  $this->getRecentQuestionList(),
           ]);
         }
 
@@ -141,6 +144,8 @@ class QuestionController extends Controller
         'user'       => $this->getUserDetails(),
         'question'   => $question,
         'images'     => $imageArray,
+        'questionsList' =>  $this->getRecentQuestionList(),
+        'point' => $this->getQuestionPoints($question[0]->id),
       ]);
 
     }
@@ -204,18 +209,26 @@ class QuestionController extends Controller
           'ans'     => 'required|max:255',
       ])->validate();
 
+      // get the user Details
+      $userData = $this->getUserDetails();
+      
       // get the question data
       $question = Question::where('qid', $qid)->where('enable', 1)->get();
+
+      // get the Points
+      $points = $this->getQuestionPoints($question[0]->id),
 
       // convert the string stored in the db to an array
       $answerList = explode(",", $question[0]->answer);
       if(in_array($request->ans,$answerList))
       {
+        // Correct answer
         session()->flash('msg', 'correct answer');
         return redirect()->back();
       }
       else
       {
+        // Wrong answer
         session()->flash('msg', 'wrong answer');
         return redirect()->back();
       }

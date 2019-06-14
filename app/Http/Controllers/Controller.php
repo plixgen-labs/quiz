@@ -58,7 +58,7 @@ class Controller extends BaseController
         if ($correct_answers > env('CORRECT_ANSWERS_THRESHOLD'))
         {
           $difficulty = (1.00-((float)$correct_answers/(float)$submitted_answers));
-          Question::where('qid', $qid)->update(['difficulty', (integer)$difficulty]);
+          // Question::where('qid', $qid)->update(['difficulty', (integer)$difficulty]);
 
           return $base_point*$difficulty;
         }

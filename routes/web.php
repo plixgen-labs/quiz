@@ -26,6 +26,8 @@ Route::get('login/{provider}/callback', 'LoginController@handleProviderCallback'
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/home', 'HomeController@index')->name('Profile');
+
 // Question routes
 Route::get('add/question', 'QuestionController@ShowQuestionAdditionForm');
 

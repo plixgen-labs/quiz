@@ -243,8 +243,8 @@ class QuestionController extends Controller
       $points = $this->getQuestionPoints($question[0]->id);
 
       // convert the string stored in the db to an array
-      $answerList = explode(",", $question[0]->answer);
-      if(in_array($request->ans,$answerList))
+      $answerList = explode(",", strtolower($question[0]->answer));
+      if(in_array(strtolower($request->ans),$answerList))
       {
         // Correct answer
         // log the answer

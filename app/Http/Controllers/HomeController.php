@@ -38,4 +38,13 @@ class HomeController extends Controller
           'questionsList' =>  $this->getRecentQuestionList(),
         ]);
     }
+
+    public function displayProfile()
+    {
+        // render the view
+        return view('home',[
+          'user'          =>  $this->getUserDetails(),
+          'questionsList' =>  $this->getRecentQuestionList(),
+        ]);
+    }
 }

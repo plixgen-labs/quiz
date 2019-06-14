@@ -18,7 +18,7 @@
 
           <div class="form-group{{ $errors->has('qtext') ? ' has-error' : '' }} row">
               <div class="col-md-12">
-                  <input type="text" class="form-control form-control-user" name="qtext" id="qtext" placeholder="Question?" value="{{''}}">
+                  <input type="text" class="form-control form-control-user" name="qtext" id="qtext" placeholder="Question?" value="{{ old('qtext') }}">
                     @if ($errors->has('qtext'))
                       <span class="help-block">
                         <strong>{{ $errors->first('qtext') }}</strong>
@@ -29,7 +29,7 @@
 
           <div class="form-group{{ $errors->has('hint') ? ' has-error' : '' }} row">
               <div class="col-md-12">
-                  <input id="hint" type="text" class="form-control form-control-user" name="hint" placeholder="Question Hint" value="{{''}}">
+                  <input id="hint" type="text" class="form-control form-control-user" name="hint" placeholder="Question Hint" value="{{ old('hint') }}">
                     @if ($errors->has('hint'))
                       <span class="help-block">
                         <strong>{{ $errors->first('hint') }}</strong>

@@ -54,7 +54,7 @@ class QuestionController extends Controller
             'ans'     => 'required|array|min:1',
             'ans.*'   => 'required|max:255',
             'files'   => 'required|array|min:2',
-            'files.*' => 'required|mimes:jpg,png,svg|dimensions:min_width=200,min_height=200',
+            'files.*' => 'required|mimes:jpg,jpeg,png,svg|dimensions:min_width=200,min_height=200',
         ])->validate();
 
         // the array of the file id inserted into the database
@@ -82,20 +82,26 @@ class QuestionController extends Controller
         {
           $host = request()->getHttpHost();
           // render view with sucess message
+          $alert = array(
+            'type' => 'success',
+            'message' => "Question Upload Success"
+          );
+          session()->flash('alert',$alert);
           return view('quesAns/addQuestion',[
             'user'       => $userData,
             'randomId'   => [mt_rand(),mt_rand()],
-            'status'     => 'success',
-            'message'    => "Question Upload Sucess. Share the question with your friends ($host/show/question/$insertedQuestion)",
             'questionsList' =>  $this->getRecentQuestionList(),
           ]);
         }else{
           // render view with failure message
+          $alert = array(
+            'type' => 'danger',
+            'message' => 'Question Upload failed'
+          );
+          session()->flash('alert',$alert);
           return view('quesAns/addQuestion',[
             'user'       => $userData,
             'randomId'   => [mt_rand(),mt_rand()],
-            'status'     => 'danger',
-            'message'    => 'Question Upload failed',
             'questionsList' =>  $this->getRecentQuestionList(),
           ]);
         }

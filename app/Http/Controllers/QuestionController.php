@@ -14,6 +14,8 @@ use App\Profile;                        // to use Profiles
 
 use App\Question;                       // to use the Question class
 
+use App\Answer;                       // to use the Answer class
+
 use DB;                                 // to acess to the database
 
 use App\Http\Controllers\View;          // to acess the views functions
@@ -224,12 +226,36 @@ class QuestionController extends Controller
       if(in_array($request->ans,$answerList))
       {
         // Correct answer
+        // log the answer
+        $insertedQuestion = Answer::create([
+            'user_id'    => $userData->id,
+            'question_id'  => $question[0]->id,
+            'answer'   => $request->ans,
+            'result' => True,
+            'note'  => 'correct answer',
+            'points_awarded' => $points,
+        ]);
+
+        // update the user points
+        $user_points = $userData->points + $points;
+
+        Profile::where('id', $userData->id)->update(['points'=>$user_points]);
+
         session()->flash('msg', 'correct answer');
         return redirect()->back();
       }
       else
       {
         // Wrong answer
+        // log the answer
+        $insertedQuestion = Answer::create([
+            'user_id'    => $userData->id,
+            'question_id' => $question[0]->id,
+            'answer'   => $request->ans,
+            'result' => False,
+            'note'  => 'wrong answer',
+            'points_awarded' => 0,
+        ]);
         session()->flash('msg', 'wrong answer');
         return redirect()->back();
       }

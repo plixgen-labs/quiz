@@ -171,6 +171,32 @@ class QuestionController extends Controller
 
     }
 
+    public function ListRecentQuestions()
+    {
+      // get the question data
+      $question = Question::where('qid', $qid)->where('enable', 1)->get();
+
+      // the files associated with the question
+      $imagesList = explode(",", $question[0]->image);
+
+      $imageArray = null;
+      $imageURLArray = null;
+
+      foreach ($imagesList as $imageId)
+      {
+          $imageArray[] = DB::table('images')->where('id', $imageId)->get(['source','type']);
+      }
+
+      // var_dump($imageURLArray);die();
+
+      return view('quesAns/showQuestion',[
+        'user'       => $this->getUserDetails(),
+        'question'   => $question,
+        'images'     => $imageArray,
+      ]);
+
+    }
+
     public function submitAnswer($qid,Request $request)
     {
       // validate the input data
@@ -193,6 +219,6 @@ class QuestionController extends Controller
         session()->flash('msg', 'wrong answer');
         return redirect()->back();
       }
-      var_dump($answerList);die();
+      // var_dump($answerList);die();
     }
 }

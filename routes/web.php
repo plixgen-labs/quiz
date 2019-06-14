@@ -49,3 +49,5 @@ Route::get('/retrive/images/{filename}', function ($filename)
 });
 
 Route::get('list/question','Controller@getRecentQuestionList');
+
+Route::get('list/question/recent','QuestionController@ListRecentQuestions');

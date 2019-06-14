@@ -45,6 +45,7 @@ class QuestionsTable extends Migration
             $table->string('answer');
             $table->boolean('result')->comment('mark the given answer as true or false');
             $table->string('note');
+            $table->integer('points_awarded')->default(0);
             $table->timestamps();
         });
     }

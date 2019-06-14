@@ -19,6 +19,15 @@
         @endforeach
 
         <br>
+        <div class="dropdown no-arrow mb-4">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="position: absolute;left: 46.5%;">
+            Hint
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+            {{ __($question[0]->hint) }}
+          </div>
+        </div>
+        <br>
         <form class="user" role="form" method="POST" action="{{ url('/add/answer/'.$question[0]->qid) }}" enctype="multipart/form-data">
           @csrf
 

@@ -130,6 +130,18 @@ class QuestionController extends Controller
       // get the question data
       $question = Question::where('qid', $qid)->where('enable', 1)->get();
 
+      // Check if the user already had answered the question correctly
+      if(Answer::where('question_id', $question[0]->id)->where('result',True)->exists())
+      {
+          // return Home
+          $alert = array(
+            'type' => 'info',
+            'message' => 'You have already answered this question'
+          );
+          session()->flash('alert',$alert);
+          return redirect()->action('HomeController@index');
+      }
+
       // the files associated with the question
       $imagesList = explode(",", $question[0]->image);
 
@@ -241,8 +253,12 @@ class QuestionController extends Controller
 
         Profile::where('id', $userData->id)->update(['points'=>$user_points]);
 
-        session()->flash('msg', 'correct answer');
-        return redirect()->back();
+        $alert = array(
+          'type' => 'success',
+          'message' => "Congrulations Correct answer $points points awarded"
+        );
+        session()->flash('alert',$alert);
+        return redirect()->action('HomeController@index');
       }
       else
       {
@@ -256,7 +272,11 @@ class QuestionController extends Controller
             'note'  => 'wrong answer',
             'points_awarded' => 0,
         ]);
-        session()->flash('msg', 'wrong answer');
+        $alert = array(
+          'type' => 'danger',
+          'message' => 'Wrong answer Please try again'
+        );
+        session()->flash('alert',$alert);
         return redirect()->back();
       }
       // var_dump($answerList);die();

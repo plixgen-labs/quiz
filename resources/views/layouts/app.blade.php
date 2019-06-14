@@ -41,12 +41,17 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          {!! Session::has('msg') ? Session::get("msg") : '' !!}
-          <!-- Message trigger for the events -->
-          @if(isset($message))
-            <div class="alert alert-{{$status}}" role="alert">
-              <strong>{{ $message }}</strong>
+          @if (session('alert') != NULL)
+          <!-- Operation Status info -->
+          <!-- <div class="container"> -->
+            <div class="container alert alert-{{session('alert.type')}} alert-dismissible fade show" role="alert" style="margin-top:20px;">
+              {{ session('alert.message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+          <!-- </div> -->
+          <!-- Operation Status info end -->
           @endif
           @yield('content')
         </div>
@@ -83,6 +88,15 @@
 
   <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+			$(document).ready(function () {
+					$('#dismiss, .overlay').on('click', function () {
+							$('#sidebar').removeClass('active');
+							$('.overlay').removeClass('active');
+					});
+			});
+	</script>
 
 </body>
 

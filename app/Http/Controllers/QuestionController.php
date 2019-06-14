@@ -54,7 +54,7 @@ class QuestionController extends Controller
             'ans'     => 'required|array|min:1',
             'ans.*'   => 'required|max:255',
             'files'   => 'required|array|min:2',
-            'files.*' => 'required|mimes:jpg,png,svg|dimensions:min_width=400,min_height=600',
+            'files.*' => 'required|mimes:jpg,png,svg|dimensions:min_width=200,min_height=200',
         ])->validate();
 
         // the array of the file id inserted into the database

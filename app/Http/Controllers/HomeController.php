@@ -106,4 +106,20 @@ class HomeController extends Controller
         session()->flash('alert',$alert);
         return redirect()->action('HomeController@index');
     }
+
+    public function leaderboard()
+    {
+        // get the users list to publish in leaderboard
+        $usersList = Profile::where('isactive', 1)->orderBy('points', 'desc')->get();
+
+        // var_dump($usersList);die();
+
+        // render the view
+        return view('leaderboard',[
+          'user'          =>  $this->getUserDetails(),
+          'questionsList' =>  $this->getRecentQuestionList(),
+          'usersList'     =>  $usersList,
+          'leaderboard'   =>  1,
+        ]);
+    }
 }

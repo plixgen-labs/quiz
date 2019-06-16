@@ -29,6 +29,13 @@
     </li>-->
 
     <!-- Nav Item - Admin actions -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('/leaderboard') }}">
+        <span class="mr-2 d-lg-inline text-gray-600 small">Leaderboard</span>
+      </a>
+    </li>
+
+    <div class="topbar-divider d-none d-sm-block"></div>
     @if($user->isadmin)
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

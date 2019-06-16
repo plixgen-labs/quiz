@@ -14,7 +14,7 @@
       <!-- Card Body -->
       <div class="card-body">
         <div class="table-responsive">
-          <table id="leaderboard" class="dataTables_wrapper dt-bootstrap4">
+          <table id="leaderboard" class="table table-borderless">
             <thead>
               <tr>
                 <th>#</th>
@@ -25,9 +25,13 @@
             <tbody>
               <?php $i = 1 ?>
               @foreach ($usersList as $udata)
-              <tr>
+              <tr
+              @if($user->id == $udata->id)
+                class="table-info"
+              @endif
+              >
                 <td>{{ $i++ }}</td>
-                <td><img class="img-profile rounded-circle" src="{{ $udata->avatar }}" style="max-height: 50px; max-width: 50px;"> {{ $udata->name }}</td>
+                <td><img class="img-profile rounded-circle" src="{{ $udata->avatar }}" style="max-height: 40px; max-width: 40px;"> {{ $udata->name }}</td>
                 <td>{{ $udata->points }}</td>
               </tr>
               @endforeach

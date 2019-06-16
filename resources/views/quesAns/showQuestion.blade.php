@@ -28,6 +28,7 @@
           </div>
         </div>
         <br>
+        @if($question[0]->user_id != $user->id)
         <form class="user" role="form" method="POST" action="{{ url('/add/answer/'.$question[0]->qid) }}" enctype="multipart/form-data">
           @csrf
 
@@ -55,6 +56,7 @@
             </div>
           </div>
         </form>
+        @endif
       </div>
     </div>
   </div>

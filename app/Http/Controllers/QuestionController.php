@@ -86,11 +86,12 @@ class QuestionController extends Controller
         // check for the insertion is success or not
         if ($insertedQuestion > 0 && $insertedQuestion != NULL)
         {
-          $host = request()->getHttpHost();
+          // credit points to the user
+          $this->updatePoints(10,"Question Creation id:$insertedQuestion");
           // render view with sucess message
           $alert = array(
             'type' => 'success',
-            'message' => "Question Upload Success"
+            'message' => "Question Created Successfully"
           );
           session()->flash('alert',$alert);
           return view('quesAns/addQuestion',[
@@ -169,9 +170,16 @@ class QuestionController extends Controller
       }
 
       // var_dump($imageURLArray);die();
-
+      if($question[0]->user_id == $userData->id)
+      {
+        $alert = array(
+          'type' => 'info',
+          'message' => 'You are the creator of the question, So you can\'t answer this question.'
+        );
+        session()->flash('alert',$alert);
+      }
       return view('quesAns/showQuestion',[
-        'user'       => $this->getUserDetails(),
+        'user'       => $userData,
         'question'   => $question,
         'images'     => $imageArray,
         'questionsList' =>  $this->getRecentQuestionList(),
@@ -264,9 +272,7 @@ class QuestionController extends Controller
         ]);
 
         // update the user points
-        $user_points = $userData->points + $points;
-
-        Profile::where('id', $userData->id)->update(['points'=>$user_points]);
+        $this->updatePoints($points);
 
         $alert = array(
           'type' => 'success',

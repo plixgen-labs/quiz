@@ -67,4 +67,14 @@ class Controller extends BaseController
 
       return $base_point;
     }
+
+    public function updatePoints($points,$remarks="none")
+    {
+      // get user data
+      $userData = $this->getUserDetails();
+      // calcualte the latest points
+      $user_points = (int)$userData->points + $points;
+      // update the points for the user
+      Profile::where('id', $userData->id)->update(['points'=>$user_points]);
+    }
 }

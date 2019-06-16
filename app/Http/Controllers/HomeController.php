@@ -45,7 +45,7 @@ class HomeController extends Controller
     {
         // render the view
         return view('profile',[
-          'user'          =>  $this->getUserDetails(),
+          'user' =>  $this->getUserDetails(),
         ]);
     }
 

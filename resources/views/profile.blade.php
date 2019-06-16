@@ -126,25 +126,4 @@
   </div>
 
 </div>
-<!-- <script src="{{ asset('js/dropzone.js') }}"></script> -->
-<script>
-function duplicate(divId) {
-    // document.getElementById('button'+divId).onclick = duplicate(divId);
-    var randomId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    var original = document.getElementById(divId);
-    var clone = original.cloneNode(true); // "deep" clone
-    clone.id = randomId; // there can only be one element with an ID
-    original.after(clone);
-    var st = '#'+ randomId +' input:text';
-    $(st).each(function(){$(this).val('');});
-    var st = '#'+ randomId +' input';
-    $(st).each(function(){$(this).val('');});
-    var st = '#button' + randomId;
-    $(st).attr('onClick','duplicate(\''+randomId+'\')');
-    // var st = '#button' + divId;
-    // $(st).attr('hidden','true');
-    // $(st).each(function(){$(this).val('');});
-}
-
-</script>
 @endsection

@@ -17,7 +17,8 @@ use App\Profile;
 use App\User;
 
 use App\Question;                       // to use the Question class
-use App\Answer;                       // to use the Answer class
+use App\Answer;                         // to use the Answer class
+use App\Pointtransaction;                         // to use the PointTransaction class
 
 class Controller extends BaseController
 {
@@ -76,5 +77,18 @@ class Controller extends BaseController
       $user_points = (int)$userData->points + $points;
       // update the points for the user
       Profile::where('id', $userData->id)->update(['points'=>$user_points]);
+      // log the transcastion in the table
+      $type = "Credit";
+      if($points < 0)
+      {
+        $type = "Debit";
+      }
+      Pointtransaction::create([
+          'user_id'    => $userData->id,
+          'type'    => $type,
+          'points'   => $points,
+          'remarks' => $remarks,
+      ]);
+
     }
 }

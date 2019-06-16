@@ -272,11 +272,11 @@ class QuestionController extends Controller
         ]);
 
         // update the user points
-        $this->updatePoints($points);
+        $this->updatePoints($points, "Question answered id:$question[0]->id");
 
         $alert = array(
           'type' => 'success',
-          'message' => "Congrulations Correct answer $points ".str_plural("point", $points)."awarded"
+          'message' => "Congrulations Correct answer $points ".str_plural("point", $points)." awarded"
         );
         session()->flash('alert',$alert);
         return redirect()->action('HomeController@index');

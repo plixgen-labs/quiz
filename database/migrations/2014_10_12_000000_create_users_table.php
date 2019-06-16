@@ -23,9 +23,15 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('isadmin')->default(0);
             $table->string('isactive')->default(1);
-            $table->string('points')->default(0);
+            $table->integer('points')->default(0);
             $table->timestamps();
         });
+
+        /** Used to alter table in database directly
+         * alter table profiles alter points drop default;
+         * alter table profiles alter column points type integer using (trim(points)::integer);
+         * alter table profiles alter points set default 0;
+         */
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');

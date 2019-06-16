@@ -18,7 +18,7 @@
 
           <div class="form-group{{ $errors->has('uname') ? ' has-error' : '' }} row">
               <div class="col-md-12">
-                  <input type="text" class="form-control form-control-user" name="uname" id="name" value="{{ $userData->name }}">
+                  <input type="text" class="form-control form-control-user" name="uname" id="name" placeholder="Name" value="{{ $user->name }}">
                     @if ($errors->has('uname'))
                       <span class="help-block">
                         <strong>{{ $errors->first('uname') }}</strong>
@@ -27,9 +27,45 @@
               </div>
           </div>
 
-          <div class="form-group{{ $errors->has('hint') ? ' has-error' : '' }} row">
+          <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} row">
               <div class="col-md-12">
-                  <input id="hint" type="text" class="form-control form-control-user" name="hint" placeholder="Question Hint" value="{{ old('hint') }}">
+                  <input id="email" type="email" class="form-control form-control-user" name="email" placeholder="Email Id" value="{{ $user->email }}">
+                    @if ($errors->has('email'))
+                      <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                      </span>
+                    @endif
+              </div>
+          </div>
+
+          <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }} row">
+              <div class="col-md-12">
+                  <input id="dob" type="date" class="form-control form-control-user" name="dob" placeholder="Date of Birth" value="{{ $user->dob }}">
+                    @if ($errors->has('dob'))
+                      <span class="help-block">
+                        <strong>{{ $errors->first('dob') }}</strong>
+                      </span>
+                    @endif
+              </div>
+          </div>
+
+          <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }} row">
+              <div class="col-md-12">Gender :
+                  <input id="gender" type="radio" class="form-control-user" name="gender" value="Male"
+                  @if($user->gender == "Male")
+                    checked="checked"
+                  @endif
+                  > Male
+                  <input id="gender" type="radio" class="form-control-user" name="gender" value="Female"
+                  @if($user->gender == "Female")
+                    checked="checked"
+                  @endif
+                  > Female
+                  <input id="gender" type="radio" class="form-control-user" name="gender" value="Other"
+                  @if($user->gender == "Other")
+                    checked="checked"
+                  @endif
+                  > Other
                     @if ($errors->has('hint'))
                       <span class="help-block">
                         <strong>{{ $errors->first('hint') }}</strong>
@@ -38,36 +74,15 @@
               </div>
           </div>
 
-          <div class="form-group{{ $errors->has('ans') ? ' has-error' : '' }} row">
-            <div class="col-sm-10 mb-3 mb-sm-0" id="{{ $randomId['1'] }}">
-              <input id="ans" type="text" class="form-control form-control-user" name="ans[]" placeholder="Answer" value="{{''}}">
-                @if ($errors->has('ans'))
-                  <span class="help-block">
-                    <strong>{{ $errors->first('ans') }}</strong>
-                  </span>
-                @endif
-            </div>
-            <div class="col-sm-2">
-              <button id="button{{ $randomId['1'] }}" onclick="duplicate('{{ $randomId['1'] }}')" type="button" class="btn btn-primary btn-circle btn-lg">
-                <i class="fas fa-plus-circle"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="form-group{{ $errors->has('files') ? ' has-error' : '' }} row">
-            <div class="col-sm-10 mb-3 mb-sm-0" id="{{ $randomId['0'] }}">
-              <input id="files" type="file" accept="image/png, image/jpeg" class="form-control form-control-user" data-icon="false" placeholder="Images" name="files[]" value="{{''}}">
-              @if ($errors->has('files'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('files') }}</strong>
-                </span>
-              @endif
-            </div>
-            <div class="col-sm-2">
-              <button id="button{{ $randomId['0'] }}" onclick="duplicate('{{ $randomId['0'] }}')" type="button" class="btn btn-primary btn-circle btn-lg">
-                <i class="fas fa-plus-circle"></i>
-              </button>
-            </div>
+          <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }} row">
+              <div class="col-md-12">
+                  <input id="phone" type="text" class="form-control form-control-user" name="phone" placeholder="Phone Number with country code" value="{{ $user->phone }}">
+                    @if ($errors->has('phone'))
+                      <span class="help-block">
+                        <strong>{{ $errors->first('phone') }}</strong>
+                      </span>
+                    @endif
+              </div>
           </div>
 
           <div class="form-group row">
@@ -99,10 +114,11 @@
       <div class="collapse show" id="collapseCardExample">
         <div class="card-body">
           <ul>
-            <li><b>Question </b>: A small text to describe the question. it can be "How these two are related?"</li>
-            <li><b>Question Hint </b>: Addition text which can help to find the answer</li>
-            <li><b>Answer </b>: Actul answer, if there are more then one answer then use + sign to add multiple.</li>
-            <li><b>Images </b>: Images, atleast 2 images are necessary, at max 6 images can be added, use + sign to add multiple images. The image should be atleast 200x200px</li>
+            <li><b>Name </b>: Your Full Name, It will be displayed in Leadersboard, and profile.</li>
+            <li><b>Email </b>: Working email address, We will reach out to you with new updated and important announcements.</li>
+            <li><b>Date of Birth </b>: Optional, As of now we will just keep it for record.</li>
+            <li><b>Gender </b>: Optional, As of now we will just keep it for record.</li>
+            <li><b>Phone Number </b>: Optional, As of now we will just keep it for record.</li>
           </ul>
         </div>
       </div>

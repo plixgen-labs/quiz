@@ -264,7 +264,7 @@ class QuestionController extends Controller
 
         $alert = array(
           'type' => 'success',
-          'message' => "Congrulations Correct answer $points points awarded"
+          'message' => "Congrulations Correct answer $points ".str_plural("point", $points)."awarded"
         );
         session()->flash('alert',$alert);
         return redirect()->action('HomeController@index');

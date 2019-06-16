@@ -32,7 +32,7 @@
               >
                 <td>{{ $i++ }}</td>
                 <td><img class="img-profile rounded-circle" src="{{ $udata->avatar }}" style="max-height: 40px; max-width: 40px;"> {{ $udata->name }}</td>
-                <td>{{ $udata->points }}</td>
+                <td style="vertical-align: middle;">{{ $udata->points }}</td>
               </tr>
               @endforeach
             </tbody>

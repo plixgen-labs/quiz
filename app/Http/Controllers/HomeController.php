@@ -46,7 +46,6 @@ class HomeController extends Controller
         // render the view
         return view('profile',[
           'user'          =>  $this->getUserDetails(),
-          'questionsList' =>  $this->getRecentQuestionList(),
         ]);
     }
 
@@ -111,7 +110,7 @@ class HomeController extends Controller
     {
         // get the users list to publish in leaderboard
         $usersList = Profile::where('isactive', 1)->orderBy('points', 'desc')->get();
-        
+
         // render the view
         return view('leaderboard',[
           'user'          =>  $this->getUserDetails(),

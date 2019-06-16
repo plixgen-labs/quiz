@@ -39,6 +39,12 @@ class QuestionController extends Controller
     public function ShowQuestionAdditionForm()
     {
       $user = $this->getUserDetails();
+      // check whether user is admin or not
+      if($user->isadmin == 0)
+      {
+        // redirect to 404 error
+        abort(404);
+      }
       return view('quesAns/addQuestion',[
         'user' => $user,
         'randomId' => [mt_rand(),mt_rand()],

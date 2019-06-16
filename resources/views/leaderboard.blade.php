@@ -27,7 +27,7 @@
               @foreach ($usersList as $udata)
               <tr>
                 <td>{{ $i++ }}</td>
-                <td><img class="img-profile rounded-circle" src="{{ $udata->avatar }}"> {{ $udata->name }}</td>
+                <td><img class="img-profile rounded-circle" src="{{ $udata->avatar }}" style="max-height: 50px; max-width: 50px;"> {{ $udata->name }}</td>
                 <td>{{ $udata->points }}</td>
               </tr>
               @endforeach

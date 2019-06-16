@@ -272,7 +272,7 @@ class QuestionController extends Controller
         ]);
 
         // update the user points
-        $this->updatePoints($points, "Question answered id:$question[0]->id");
+        $this->updatePoints($points, "Question answered id:".$question[0]->id);
 
         $alert = array(
           'type' => 'success',

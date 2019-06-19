@@ -99,6 +99,7 @@
       <div class="collapse show" id="collapseCardExample">
         <div class="card-body">
           <ul>
+            <li> About the type of the Questions there is not restriction of the field and type, it can be related to anything, but please avoide quetions related to politics as these are regional base and dynamic in nature, or anything which is offensive in nature.</li>
             <li><b>Question </b>: A small text to describe the question. it can be "How these two are related?"</li>
             <li><b>Question Hint </b>: Addition text which can help to find the answer</li>
             <li><b>Answer </b>: Actul answer, if there are more then one answer then use + sign to add multiple.</li>

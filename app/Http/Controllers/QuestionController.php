@@ -244,7 +244,7 @@ class QuestionController extends Controller
     {
       // validate the input data
       $validator = Validator::make($request->all(), [
-          'ans'     => 'required|max:255',
+          'ans'  => 'required|max:255',
       ])->validate();
 
       // get the user Details

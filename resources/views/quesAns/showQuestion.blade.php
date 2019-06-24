@@ -28,7 +28,7 @@
           </div>
         </div>
         <br>
-        @if(@disable_answer)
+        @if($disable_answer==0)
         <form class="user" role="form" method="POST" action="{{ url('/add/answer/'.$question[0]->qid) }}" enctype="multipart/form-data">
           @csrf
 

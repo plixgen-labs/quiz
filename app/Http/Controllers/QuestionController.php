@@ -146,18 +146,6 @@ class QuestionController extends Controller
       // get the question data
       $question = Question::where('qid', $qid)->where('enable', 1)->get();
 
-      // Check if the user already had answered the question correctly
-      if(Answer::where('user_id', $userData->id)->where('question_id', $question[0]->id)->where('result',True)->exists())
-      {
-          // return Home
-          $alert = array(
-            'type' => 'info',
-            'message' => 'You have already answered this question'
-          );
-          session()->flash('alert',$alert);
-          return redirect()->action('HomeController@index');
-      }
-
       // the files associated with the question
       $imagesList = explode(",", $question[0]->image);
 
@@ -169,6 +157,7 @@ class QuestionController extends Controller
           $imageArray[] = DB::table('images')->where('id', $imageId)->get(['source','type']);
       }
 
+      $disable_answer = 0;  // do not disable the answer field
       // var_dump($imageURLArray);die();
       if($question[0]->user_id == $userData->id)
       {
@@ -176,6 +165,17 @@ class QuestionController extends Controller
           'type' => 'info',
           'message' => 'You are the creator of the question, So you can\'t answer this question.'
         );
+        $disable_answer = 1;
+        session()->flash('alert',$alert);
+      }
+      // Check if the user already had answered the question correctly
+      elseif(Answer::where('user_id', $userData->id)->where('question_id', $question[0]->id)->where('result',True)->exists())
+      {
+        $alert = array(
+          'type' => 'info',
+          'message' => 'You have already answered this question'
+        );
+        $disable_answer = 1;
         session()->flash('alert',$alert);
       }
       return view('quesAns/showQuestion',[
@@ -184,6 +184,7 @@ class QuestionController extends Controller
         'images'     => $imageArray,
         'questionsList' =>  $this->getRecentQuestionList(),
         'point' => $this->getQuestionPoints($question[0]->id),
+        'disable_answer' => $disable_answer,
       ]);
 
     }

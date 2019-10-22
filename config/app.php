@@ -162,6 +162,7 @@ return [
 
         // Other service providers...
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Rollbar\Laravel\RollbarServiceProvider::class,
 
     ],
 

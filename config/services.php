@@ -41,7 +41,7 @@ return [
         'redirect' => env('GOOGLE_AUTH_URL'),
     ],
 
-    'google' => [
+    'facebook' => [
         'client_id' => env('FACEBOOK_AUTH_ID'),         // Your google Client ID
         'client_secret' => env('FACEBOOK_AUTH_SCECRET'), // Your google Client Secret
         'redirect' => env('FACEBOOK_AUTH_URL'),

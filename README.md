@@ -1,6 +1,8 @@
 # Quiz
 Quiz in a form of Treasure hunt
 
+[![CodeFactor](https://www.codefactor.io/repository/github/plixgen-labs/quiz/badge)](https://www.codefactor.io/repository/github/plixgen-labs/quiz)
+
 Copyright [2019] [Aman Kumar]
 
    Licensed under the Apache License, Version 2.0 (the "License");
